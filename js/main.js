@@ -122,6 +122,7 @@
 		if(o.math && o.math !== true) {
 			var vars = variableNames(o.math);
 			if(vars.length === 0) {
+				d.style.cursor = 'default';
 				return d;
 			}
 			//var j = sub(o.math, 'A', true);
@@ -175,6 +176,8 @@
 				}
 				visible = !visible;
 			})
+		} else {
+			d.style.cursor = 'default';
 		}
 		return d;
 	}

@@ -251,13 +251,25 @@ window.MyLang = (function () {
 				var a = html(ast[0]);
 				a = paren(a, needparen(a.p, p, ast.operator));
 				sp.appendChild(a);
-				var op = document.createElement('span');
-				op.className = 'operator';
-				op.appendChild(document.createTextNode(ast.operator));
-				if(ast.operator === '∨' || ast.operator === '∧') {
-					op.classList.add('small');
+				
+				if(ast.operator !== '∧') {
+					var op = document.createElement('span');
+					op.className = 'operator';
+					op.appendChild(document.createTextNode(ast.operator));
+					if(ast.operator === '∨' || ast.operator === '∧') {
+						op.classList.add('small');
+					}
+					
+					sp.appendChild(op);
+				} else {
+
+					var op = document.createElement('span');
+					op.appendChild(document.createTextNode(' '));
+					op.style.fontSize = '6px';
+					
+					sp.appendChild(op);
+					
 				}
-				sp.appendChild(op);
 				var b = html(ast[1]);
 				b = paren(b, needparen(b.p, p, ast.operator));
 				sp.appendChild(b);

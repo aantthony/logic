@@ -1,0 +1,103 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+body {
+	background:white;
+	-webkit-user-select:none;
+  	background: #222;
+}
+html, body{
+	
+}
+
+#header{
+
+}
+
+#main {
+	
+	color: white;
+	font-family: 'Menlo';
+	font-size: 16px;
+	line-height: 25px;
+	padding-top:8px;
+}
+#main .item {
+	padding-left: 18px;
+}
+.item .query {
+	display: inline-block;
+	padding-left: 4px;
+	color: #888;
+	text-shadow: 0px 1px 0px #444;
+}
+.item .result {
+	padding-left: 14px;
+	color: #ccc;
+}
+.item .result .operator {
+	padding-left: 4px;
+	padding-right: 4px;
+	color: #ddd;
+	font-family: sans-serif;
+}
+.item .result .operator.small {
+}
+
+.item .result .A {
+	border-bottom: 3px solid #c00;
+}
+.item .result .B {
+	border-bottom: 3px solid #0c0;
+}
+.item .result .C {
+	border-bottom: 3px solid #08f;
+}
+
+.item .result.error {
+	color: #844;
+	font-size: small;
+	text-shadow: 0px 1px 0px rgba(0,0,0,0.3);
+}
+
+.item.current .inputbox{
+	padding-left: 4px;
+}
+.item.current {
+	padding-bottom: 32px;
+}
+.item.current .cursor{
+	font-weight: bold;
+	color: #c80;
+	opacity: 1.0;
+}
+
+.item .cursor{
+	font-weight: bold;
+	color: #ccf;
+	opacity: 0.4;
+}
+
+.inputbox {
+	display: inline-block;
+	/*-webkit-user-select:auto;*/
+}
+.inputbox:focus {
+	outline: none;
+}
+.inputbox:focus .cursor {
+	display: inline-block;
+	height: 18px;
+	background: #ccc;
+	width: 0px;
+	margin-bottom: -3px;
+}
+.inputbox:focus .cursor:after{
+	position: relative;
+	left:-5px;
+	content:"|"
+}
+
+#footer {
+}

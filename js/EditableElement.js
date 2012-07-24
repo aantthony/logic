@@ -94,7 +94,8 @@
 				}
 				
 				this.resetBlinkTimer();
-				return;
+				e.preventDefault();
+				return false;
 			case 'Shift':
 			case 'Enter':
 				return;

@@ -24,6 +24,7 @@ window.MyLang = (function () {
 		}
 	});
 	operators_list.push('-');
+	operators_list.push('|');
 	var parser = new Parser({
 		token_types: {
 			parenopen: {
@@ -295,9 +296,9 @@ window.MyLang = (function () {
 			d.style.color = ast ? '#0c0' : '#c00';
 			d.appendChild(document.createTextNode(ast.toString()));
 		} else {
-			d.style.color = '#0cf';
+			d.className = 'varname';
 			if(ast === 'A' || ast === 'B' || ast === 'C') {
-				d.className = ast;
+				d.classList.add(ast);
 			}
 			d.appendChild(document.createTextNode(ast));
 			d.p = Infinity;
@@ -308,14 +309,18 @@ window.MyLang = (function () {
 	var compiler = new Compiler();
 	var ML = {
 		execute: function (str) {
-			return execute(parser(str));
+			if(typeof str === 'string') {
+				str = parser(str);
+			}
+			return execute(str);
 		},
 		compile: function (str) {
 			return parser(str);
 		},
 		HTML: function (ast) {
 			return html(ast);
-		}
+		},
+		sop: strop
 	};
 	
 	return ML;

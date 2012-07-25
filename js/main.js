@@ -139,6 +139,7 @@
 			var l = 1 << vl;
 			tt.n = vl;
 			tt.vars = vars;
+			var all_same = undefined;
 			for(i = 0; i < l; i++) {
 				var b;
 				var current = [];
@@ -150,8 +151,20 @@
 				current.forEach(function (p) {
 					ttr.push(p);
 				});
+				if(all_same === undefined) {
+					all_same = result;
+				}else {
+					if(all_same !== result) {
+						all_same = -1;
+					}
+				}
 				ttr.push(result);
 				tt.push(ttr);
+			}
+			console.log(all_same)
+			if(typeof all_same === 'boolean') {
+				r.removeChild(o.result);
+				r.appendChild(MyLang.HTML(all_same));
 			}
 			var created = false;
 			var visible = false;

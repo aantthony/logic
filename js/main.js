@@ -44,6 +44,10 @@
 				case MyLang.sop.and:
 					o = '&&';
 					break;
+
+				case MyLang.sop.equal:
+					o = '===';
+					break;
 				case MyLang.sop.or:
 					o = '||';
 					break;
@@ -161,7 +165,6 @@
 				ttr.push(result);
 				tt.push(ttr);
 			}
-			console.log(all_same)
 			if(typeof all_same === 'boolean') {
 				r.removeChild(o.result);
 				r.appendChild(MyLang.HTML(all_same));
@@ -170,7 +173,7 @@
 			var visible = false;
 			var tH = {};
 			var padding = 8;
-			d.addEventListener('click', function () {
+			function showIt() {
 				if(created === false) {
 					created = TruthTable(tt);
 					d.appendChild(created);
@@ -181,13 +184,51 @@
 						created.style.height = tH.max;
 					}, 0);
 					return;
-				}
-				if (visible) {
-					created.style.height = 0 + 'px';
 				} else {
 					created.style.height = tH.max;
 				}
-				visible = !visible;
+				visible = true;
+			}
+			function hideIt(){
+				created.style.height = 0 + 'px';
+				visible = false;
+			}
+			var hideShow = (function () {
+				if (visible) {
+					hideIt();
+				} else {
+					showIt();
+				}
+			});
+			var touchstart = 0;
+			var touchIdentifier;
+			var toHide = false;
+			d.bind({
+				click: hideShow,
+				touchstart: function (e) {
+					if(toHide === true) {
+						toHide = -1;
+						hideIt();
+					} else {
+						showIt();
+					}
+					e.preventDefault();
+					touchstart = new Date();
+					return false;
+				},
+				touchend: function (e) {
+					if(toHide === -1) {
+						toHide = false;
+						return;
+					}
+					var delay = new Date() - touchstart;
+					if (delay < 200) {
+						toHide = true;
+					} else {
+						hideIt();
+						
+					}
+				}
 			})
 		} else {
 			d.style.cursor = 'default';
@@ -197,8 +238,8 @@
 	var history = $$('#history')[0];
 	var inputbox = $$('.inputbox')[0];
 	var j = new EditableElement(inputbox, '');
-	inputbox.addEventListener('keydown', function (e) {
-		if(e.keyIdentifier === 'Enter') {
+	j.onenter = (function (e) {
+		if(1 || e.keyIdentifier === 'Enter') {
 			var text = j.text();
 			if(text === '__fs__') {
 				$$('#main')[0].webkitRequestFullScreen();
@@ -217,9 +258,8 @@
 					result: MyLang.HTML(res),
 					math: res
 				});
-				
 			} catch(ex) {
-				console.error(ex);
+				// console.error(ex);
 				h = new HistoryElement({
 					query: text,
 					error: ex.message
@@ -227,9 +267,9 @@
 				
 			}
 			
-			
 			history.appendChild(h);
-			document.body.scrollTop = document.body.scrollHeight;
+			j.resetBlinkTimer();
+			// inputbox.focus();
 		}
 	});
 	$$('.item.current')[0].addEventListener('click', function () {

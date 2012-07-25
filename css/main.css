@@ -1,13 +1,29 @@
+
 * {
 	margin: 0;
 	padding: 0;
 }
 html, body{
-	height: 100%;
+}
+
+@media only screen and (max-device-width: 768px) and (orientation:portrait) {
+	html, body {
+		
+	}
+}
+
+@media only screen (max-device-width: 768px) and (orientation:landscape) {
+	html, body {
+		
+	}
+	
 }
 body {
 	background:white;
 	-webkit-user-select:none;
+	-moz-user-select:none;
+	-o-user-select:none;
+	user-select:none;
   	background: #222;
   	cursor: text;
 }
@@ -74,9 +90,11 @@ html, body{
 
 
 .item .table.container {
-	
 	background:rgba(0,0,0,0.4);
 	-webkit-transition: height 0.2s ease-out;
+	-moz-transition: height 0.2s ease-out;
+	-o-transition: height 0.2s ease-out;
+	transition: height 0.2s ease-out;
 	height: 0px;
 	overflow: hidden;
 	box-shadow: 0px 4px 5px black inset;
@@ -116,8 +134,43 @@ html, body{
 	border-top: 2px solid #111;
 }
 .item.current .inputbox{
+
+	-webkit-user-select: text;
+	-moz-user-select: text;
+	-o-user-select: text;
+	user-select: text;
+	
+	-webkit-tap-highlight-color:rgba(0,0,0,0);
 	padding-left: 4px;
 }
+*{
+ -webkit-tap-highlight-color:rgba(0,0,0,0);
+}
+
+
+.textarea {
+	position: relative;
+	-webkit-user-select: text;
+	-moz-user-select: text;
+	-o-user-select: text;
+	user-select: text;
+}
+textarea{
+	user-select: text;
+	-moz-user-select: text;
+	-webkit-user-select: text;
+	background: red;
+	opacity: 0;
+	border: 0;
+	margin: 0;
+	padding: 0;
+	position: absolute;
+	left: -50px;
+	width: 1px;
+	height: 1px;
+	outline: none;
+}
+
 .item.current {
 	padding-bottom: 32px;
 }
@@ -142,14 +195,16 @@ html, body{
 .inputbox:focus {
 	outline: none;
 }
-.inputbox:focus .cursor {
+
+
+.inputbox.focus .cursor {
 	display: inline-block;
 	height: 18px;
 	background: #ccc;
 	width: 0px;
 	margin-bottom: -3px;
 }
-.inputbox:focus .cursor:after{
+.inputbox.focus .cursor:after{
 	position: relative;
 	left:-5px;
 	content:"|"

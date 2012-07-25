@@ -10,7 +10,7 @@ window.MyLang = (function () {
 		[['<=', '⇐', '<', '<-']],
 		[['v', '+', '||', '∨']],
 		[['^', '*', '&&', '&','∧']],
-		[['=', '==', '<=>','<>', '⇔']],
+		[['=', '==', '<=>','<>', '⇔', '⇐⇒']],
 		[['!', '¬'], R, 1]
 	];
 	var operators_list = [];
@@ -190,6 +190,8 @@ window.MyLang = (function () {
 				case '<=>':
 				case '⇔':
 				case '<>':
+				case '==':
+				case '⇐⇒':
 					return op.equal(ast);
 				case '=>':
 				case '>':
@@ -214,6 +216,8 @@ window.MyLang = (function () {
 				case '+':
 				case '∨':
 					return op.or(ast);
+				case '⊕':
+					return op.xor(ast);
 			}
 		}
 		return ast;
